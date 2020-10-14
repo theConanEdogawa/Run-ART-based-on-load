@@ -8,11 +8,9 @@ preset_maximum_load=2
 #抓取系统1分钟平均负载
 average=$(uptime | awk '{print $10}' | cut -f 1 -d ",")
 
-#抓取系统1分钟平均负载并取个位整数
-average_int=$(uptime | awk '{print $10}' | cut -f 1 -d ".")
 
 #当前负载小于2时，运行ART，否则不运行
-if (("$average_int" < "$preset_maximum_load")); then
+if (("$average" < "$preset_maximum_load")); then
     echo -e "$(date "+%Y.%m.%d %H:%M:%S") System load: $average" >> $log
     echo "The ART was executed successfully" >> $log
     /usr/local/bin/autoremove-torrents --conf=/home/art/config.yml --log=/home/art/logs
