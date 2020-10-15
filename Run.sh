@@ -6,7 +6,7 @@ log=/home/art/logs/Run-ART-based-on-load.log
 preset_maximum_load=2
 
 #抓取系统1分钟平均负载
-average=$(uptime | awk '{print $10}' | cut -f 1 -d ",")
+average=$(cat /proc/loadavg | awk '{print $1}')
 
 
 #当前负载小于2时，运行ART，否则不运行
